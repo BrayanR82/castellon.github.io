@@ -19,13 +19,11 @@
 
   <!-- Navegación actualizada (se quitan anclas mision/valores y se agrega identidad) -->
   <nav class="home-nav">
-    <ul class="nav-list">
+    <button class="nav-toggle" aria-expanded="false" aria-controls="homeMenu" aria-label="Abrir menú">☰</button>
+    <ul id="homeMenu" class="nav-list">
       <li><a class="active" href="#inicio">Inicio</a></li>
       <li><a href="Sedes.html">Sedes</a></li>
       <li><a href="Titulaciones.html">Titulaciones</a></li>
-      <li><a href="#mision">Misión</a></li>
-      <li><a href="#vision">Visión</a></li>
-      <li><a href="#valores">Valores</a></li>
       <li><a href="Contacto.html">Contacto</a></li>
     </ul>
   </nav>
@@ -328,6 +326,34 @@
         const img = e.target.closest('img');
         if(!img || isIgnorable(img)) return;
         openLightbox(img);
+      });
+    })();
+  </script>
+  <script>
+    // Toggle menú móvil home-nav
+    (function() {
+      const nav = document.querySelector('.home-nav');
+      const btn = nav.querySelector('.nav-toggle');
+      function closeMenu() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          closeMenu();
+        } else {
+          nav.classList.add('open');
+          btn.setAttribute('aria-expanded','true');
+        }
+      });
+      // Cerrar al cambiar a desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 640) closeMenu();
+      });
+      // Cerrar con Escape
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeMenu();
       });
     })();
   </script>
