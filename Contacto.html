@@ -1,0 +1,223 @@
+<!--
+Archivo: Contacto.html
+Propósito:
+  - Página de contacto estática para "ESS" con un hero, formulario de contacto y detalles de contacto.
+  - Diseñada para usuarios hispanohablantes (html lang="es").
+
+Estructura:
+  - HEAD
+    - Metadatos: UTF-8, viewport responsive.
+    - Título y preconexiones de fuentes web (Google Fonts: Poppins, Inter).
+    - Hoja de estilo externa: estilos/styles.css.
+  - BODY
+    - Header (role="banner") con logo y navegación principal (role="navigation", aria-label="Main navigation").
+    - Sección hero (.page-hero.is-contacto) con overlay y título/subtítulo.
+    - Main que contiene:
+      - Tarjeta de contacto (.contact-card.fade-in)
+      - Formulario (.styled-form) con tres campos (nombre, email, mensaje) y botones de acción (submit/reset).
+      - Bloque de información de contacto con teléfono y dirección.
+
+Detalles del formulario:
+  - Los inputs usan texto placeholder y el atributo required para validación en cliente:
+    - Input de texto para "Nombre completo *"
+    - Input de email para "tunombre@ejemplo.com *" (type="email" aplica validación de email del navegador)
+    - Textarea para el mensaje
+  - No se provee action ni method en el formulario — actualmente es solo HTML del lado del cliente.
+  - No hay atributos name o id explícitos; las etiquetas envuelven los inputs (label > input), lo que asocia visualmente los campos pero impide asociación programática mediante for/id.
+
+Comportamiento JavaScript:
+  - IIFE en línea implementa un lightbox ligero para imágenes:
+    - Al hacer clic en una imagen (excepto las que tengan la clase "mark") crea un backdrop con un elemento img clonado.
+    - El backdrop tiene role="dialog".
+    - Cierre: hacer clic en el backdrop, presionar Escape, o interactuar con el backdrop elimina el lightbox.
+    - Añade/quita la clase 'lb-open' al body mientras está abierto.
+  - Notas: el foco no se atrapa dentro del diálogo; el foco no se restaura al elemento que lo abrió al cerrar.
+
+Notas de accesibilidad y sugerencias:
+  - Bueno: atributo lang, role="banner", aria-label en la navegación, encabezados semánticos.
+  - Mejorar accesibilidad del formulario:
+    - Añadir id y name a los inputs; asociar labels usando for o mantener labels envolventes pero asegurar nombres accesibles.
+    - Proveer indicadores visibles de campos obligatorios y aria-required cuando corresponda.
+    - Incluir validación en servidor y mensajes de error con regiones aria-live para retroalimentación a lectores de pantalla.
+  - Mejorar accesibilidad del lightbox:
+    - Atrapar el foco dentro del lightbox mientras está abierto y restaurarlo al elemento desencadenante al cerrarlo.
+    - Añadir aria-modal="true" al wrapper del diálogo y un aria-label o aria-labelledby descriptivo.
+    - Asegurar que usuarios solo con teclado puedan abrir/cerrar de forma fiable y que el manejador de Escape sea robusto.
+  - Asegurar que las imágenes tengan texto alternativo significativo cuando proceda (actualmente usa fallback vacío).
+
+Seguridad y consideraciones del backend:
+  - Implementar manejo del formulario en servidor (POST) con protección CSRF.
+  - Validar y sanear todos los inputs en el servidor para prevenir XSS, inyección y spam.
+  - Considerar limitación de tasa o CAPTCHA para reducir envíos automatizados.
+  - Usar HTTPS para envíos del formulario.
+
+Rendimiento y UX:
+  - Añadir action y method explícitos al formulario, y mejora progresiva para envío AJAX con feedback apropiado.
+  - Añadir atributos name a los inputs para facilitar el procesamiento en servidor.
+  - Proveer estados de éxito y error tras el envío (mensaje inline o redirección).
+  - Considerar lazy-loading de imágenes no críticas y precarga cuidadosa de fuentes.
+  - Móvil: asegurar que styles.css contiene reglas responsivas; meta viewport ya está presente.
+
+Localización:
+  - El contenido y la interfaz están en español; asegurar que mensajes y validaciones del servidor estén también localizados.
+
+Mantenimiento:
+  - Mantener recursos externos (fuentes, estilos) actualizados y con fallback seguro.
+  - Mover el script inline a un archivo JS separado para caching y mantenibilidad si el proyecto crece.
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Metadatos básicos -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vista previa - Contacto ESS (Estilo Unificado)</title>
+
+  <!-- Preconexión y carga de fuentes web (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="img/logo.jpg" />
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+
+<body>
+  <!-- Encabezado del sitio -->
+  <header class="site-header header-simple" role="banner">
+    <div class="header-inner">
+      <!-- Logo / marca: el .mark se usa visualmente; aria-hidden para que lectores no lo nominen -->
+      <div class="logo"><span class="mark" aria-hidden="true"></span><span class="brand">ESS</span></div>
+
+      <!-- Navegación principal; aria-label describe la región para lectores de pantalla -->
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="Sedes.html">Sedes</a></li>
+          <li><a href="Titulaciones.html">Titulaciones</a></li>
+          <li><a class="active" href="Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sección hero / cabecera visual de la página de contacto -->
+  <section class="page-hero is-contacto">
+    <!-- Capa de overlay para oscurecer o tintar la imagen de fondo -->
+    <div class="overlay"></div>
+
+    <div class="hero-inner">
+      <h1>Contacto</h1>
+      <p class="hero-sub">Estamos aquí para ayudarte. Escríbenos y te respondemos pronto</p>
+    </div>
+  </section>
+
+  <main>
+    <!-- Tarjeta principal de contacto -->
+    <section id="contacto" class="contact-card fade-in">
+      <div class="container">
+        <h2 class="main-contacto-title">Envíanos un mensaje</h2>
+        <p class="muted">Te respondemos en menos de 48 horas. Los campos con * son obligatorios.</p>
+
+        <!-- Formulario: actualmente solo HTML (sin action ni method). -->
+        <!-- Nota: las etiquetas envuelven los inputs en lugar de usar for/id; esto es válido visualmente
+             pero complica la asociación programática y el envío (faltan name/id). -->
+        <form class="styled-form">
+          <!-- Campo de nombre: placeholder visible, required para validación cliente -->
+          <label class="field">
+            <span class="label-emoji">👤</span>
+            <input type="text" placeholder="Nombre completo *" required>
+          </label>
+
+          <!-- Campo de correo: type="email" activa la validación básica del navegador -->
+          <label class="field">
+            <span class="label-emoji">✉️</span>
+            <input type="email" placeholder="tunombre@ejemplo.com *" required>
+          </label>
+
+          <!-- Textarea para mensaje: rows fijos y required -->
+          <label class="field">
+            <span class="label-emoji">📝</span>
+            <textarea rows="6" placeholder="Escribe tu mensaje *" required></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="primary">Enviar mensaje</button>
+            <button type="reset" class="ghost">Limpiar</button>
+          </div>
+        </form>
+
+        <!-- Información de contacto estática -->
+        <div class="contact-info">
+          <div class="info-item">
+            <span class="info-emoji">📞</span>
+            <div><strong>Teléfono</strong><br>+34 600 123 987</div>
+          </div>
+
+          <div class="info-item">
+            <span class="info-emoji">📍</span>
+            <div><strong>Dirección</strong><br>Calle Malilla 46026, Valencia</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /* Lightbox ligero:
+       - Captura clics en imágenes (salvo las que tienen la clase 'mark').
+       - Crea un backdrop con role="dialog" y un elemento <img> clonado.
+       - Cierre al hacer clic fuera, al pulsar Escape o al remover el backdrop.
+       - Añade la clase 'lb-open' al body mientras el lightbox está visible.
+       Notas de accesibilidad (no implementadas aquí): atrapar el foco, aria-modal="true",
+       restaurar foco al elemento origen y proveer un label descriptivo. */
+    (function(){
+      const ignore = i => i.classList.contains('mark');
+
+      function light(i){
+        // Wrapper del lightbox (backdrop)
+        const wrap=document.createElement('div');
+        wrap.className='lightbox-backdrop';
+        wrap.setAttribute('role','dialog');
+
+        // Imagen mostrada en el lightbox; usa alt existente o cadena vacía
+        const pic=document.createElement('img');
+        pic.src=i.src; pic.alt=i.alt||'';
+        wrap.appendChild(pic);
+
+        // Insertar en el DOM y marcar el body
+        document.body.appendChild(wrap);
+        document.body.classList.add('lb-open');
+
+        // Función para cerrar y limpiar listeners
+        function shut(){
+          wrap.remove();
+          document.body.classList.remove('lb-open');
+          document.removeEventListener('keydown',esc);
+        }
+
+        // Manejador de tecla Escape
+        function esc(e){
+          if(e.key==='Escape') shut();
+        }
+
+        // Cerrar al hacer click en el backdrop; evitar que el click en la imagen cierre
+        wrap.addEventListener('click',shut);
+        pic.addEventListener('click',e=>e.stopPropagation());
+        document.addEventListener('keydown',esc);
+      }
+
+      // Delegación global: abrir lightbox al clicar una imagen que no sea .mark
+      document.addEventListener('click',e=>{
+        const im=e.target.closest('img');
+        if(!im || ignore(im)) return;
+        light(im);
+      });
+    })();
+  </script>
+</body>
+</html>
+
+
+
+

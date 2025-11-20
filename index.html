@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ESS - Castellón</title>
+  <link rel="shortcut icon" href="img/logo.jpg" />
+  
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+<body>
+
+  <!-- Navegación actualizada (se quitan anclas mision/valores y se agrega identidad) -->
+  <nav class="home-nav">
+    <ul class="nav-list">
+      <li><a class="active" href="#inicio">Inicio</a></li>
+      <li><a href="Sedes.html">Sedes</a></li>
+      <li><a href="Titulaciones.html">Titulaciones</a></li>
+      <li><a href="#mision">Misión</a></li>
+      <li><a href="#vision">Visión</a></li>
+      <li><a href="#valores">Valores</a></li>
+      <li><a href="Contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Encabezado (hero) -->
+  <header id="inicio" class="hero">
+    <div class="hero-inner">
+      <h1>Escuela Superior de Servicios</h1>
+      <p class="hero-lead">Formación profesional innovadora, con profesorado experto y proyección laboral real.</p>
+      <a class="cta-main" href="Titulaciones.html">Explorar Titulaciones</a>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <main>
+    <!-- Reemplazo feature-grid (ahora 6 tarjetas) -->
+    <section class="intro-section fade-in">
+      <h2 id="subtitulo">Bienvenidos a la ESS Castellón</h2>
+      <p class="intro-sub">Somos un centro líder dedicado a la excelencia académica. Combinamos teoría, práctica real y tecnología educativa avanzada.</p>
+
+      <div class="feature-carousel" aria-label="Carrusel de características">
+        <button class="fc-nav prev" aria-label="Anterior">‹</button>
+
+        <div class="fc-viewport">
+          <div class="fc-track">
+            <article class="feature-card">
+              <img src="img/dual.jpg" alt="Formación dual ESS" class="fc-img">
+              <h3>Formación Dual</h3>
+              <p class="meta">Duración: 2 años • Empleo estimado: 88% • Plazas: 30</p>
+              <p>Modelo integrado aula-empresa con prácticas remuneradas y seguimiento individualizado por mentores del sector.</p>
+            </article>
+
+            <article class="feature-card">
+              <img src="img/digital.jpg" alt="Innovación digital ESS" class="fc-img">
+              <h3>Innovación Digital</h3>
+              <p class="meta">Laboratorios: 3 • Proyectos: 12</p>
+              <p>Plataformas interactivas, simuladores y mini-hackathons que aproximan a los estudiantes a retos reales del mercado.</p>
+            </article>
+
+            <article class="feature-card">
+              <img src="img/empleo.png" alt="Empleabilidad" class="fc-img">
+              <h3>Empleabilidad</h3>
+              <p class="meta">Convenios con +40 empresas locales</p>
+              <p>Bolsa de empleo activa, talleres de entrevista y prácticas garantizadas para perfiles destacados.</p>
+            </article>
+
+            <article class="feature-card">
+              <img src="img/ment.jpg" alt="Mentoring" class="fc-img">
+              <h3>Mentoring</h3>
+              <p class="meta">Ratio mentor/alumno: 1:12</p>
+              <p>Acompañamiento personalizado por profesionales del sector que orientan trayectorias y proyectos de emprendimiento.</p>
+            </article>
+
+            <article class="feature-card">
+              <img src="img/sos.jpg" alt="Sostenibilidad" class="fc-img">
+              <h3>Sostenibilidad</h3>
+              <p class="meta">Iniciativas verdes: 6</p>
+              <p>Proyectos reales integrados en el currículo para reducir huella y promover buenas prácticas empresariales sostenibles.</p>
+            </article>
+
+            <article class="feature-card">
+              <img src="img/comu.jpg" alt="Comunidad ESS" class="fc-img">
+              <h3>Comunidad ESS</h3>
+              <p class="meta">Eventos 18 • alumnos activos: 600+</p>
+              <p>Una red colaborativa que potencia competencias técnicas y habilidades humanas mediante grupos, encuentros y talleres.</p>
+            </article>
+          </div>
+        </div>
+
+        <button class="fc-nav next" aria-label="Siguiente">›</button>
+      </div>
+
+      <script>
+        (function () {
+          const viewport = document.querySelector('.fc-viewport');
+          const next = document.querySelector('.fc-nav.next');
+          const prev = document.querySelector('.fc-nav.prev');
+
+          // Desplazar por el ancho del viewport para avanzar al siguiente conjunto de tarjetas
+          function step(delta = 1) {
+            const amount = viewport.scrollWidth / 6 * delta; // Dividir entre 6 tarjetas
+            viewport.scrollBy({ left: amount, behavior: 'smooth' });
+          }
+
+          next.addEventListener('click', () => step(1));
+          prev.addEventListener('click', () => step(-1));
+        })();
+      </script>
+    </section>
+
+    <section class="highlight">
+      <div class="highlight-inner">
+        <h3>Formación pensada para tu futuro</h3>
+        <p>En la ESS potenciamos tus habilidades y te preparamos para un mercado laboral competitivo con metodologías activas y acompañamiento continuo.</p>
+        <div class="highlight-badges">
+          <div class="highlight-badge"><span class="icon">✓</span>Prácticas reales</div>
+          <div class="highlight-badge"><span class="icon">✓</span>Orientación laboral</div>
+          <div class="highlight-badge"><span class="icon">✓</span>Tecnología aplicada</div>
+          <div class="highlight-badge"><span class="icon">✓</span>Proyectos colaborativos</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bloque Misión -->
+    <section id="mision" class="identity-block mission-block fade-in">
+      <div class="ib-overlay"></div>
+      <div class="ib-inner">
+        <div class="ib-text">
+          <h2>Misión</h2>
+          <p>Formar profesionales íntegros, competentes y adaptables mediante una combinación rigurosa de práctica real, tecnología educativa y desarrollo humano. Impulsamos el aprendizaje aplicado con proyectos colaborativos y conexión directa con empresas.</p>
+          <ul class="ib-list">
+            <li>Aprendizaje experiencial y dual</li>
+            <li>Evaluación formativa continua</li>
+            <li>Mentoría y orientación profesional</li>
+          </ul>
+        </div>
+        <div class="ib-media">
+          <img src="img/profe.jpg" alt="Docentes y alumnos en sesión formativa">
+        </div>
+      </div>
+    </section>
+
+    <!-- Bloque Visión -->
+    <section id="vision" class="identity-block vision-block fade-in">
+      <div class="ib-overlay"></div>
+      <div class="ib-inner reverse">
+        <div class="ib-media">
+          <img src="img/salidas.jpg" alt="Proyección profesional ESS">
+        </div>
+        <div class="ib-text">
+          <h2>Visión</h2>
+          <p>Ser referente nacional en Formación Profesional avanzada destacando por innovación pedagógica, internacionalización gradual, red de mentores y compromiso sostenible con el entorno. Evolucionamos alineados a sectores emergentes y demandas laborales reales.</p>
+          <div class="tags-row">
+            <span class="tag">Innovación</span>
+            <span class="tag">Conexión empresarial</span>
+            <span class="tag">Internacionalización</span>
+            <span class="tag">Sostenibilidad</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bloque Valores -->
+    <section id="valores" class="identity-block values-block fade-in">
+      <div class="ib-overlay"></div>
+      <div class="ib-inner stacked">
+        <div class="ib-text wide">
+          <h2>Valores</h2>
+          <p>Nuestros principios guían cada decisión y cada interacción: construyen confianza, elevan estándares y consolidan una comunidad comprometida.</p>
+        </div>
+        <div class="values-flex">
+          <div class="value-large">
+            <h3>Integridad</h3>
+            <p>Actuar con ética, transparencia y responsabilidad institucional.</p>
+          </div>
+          <div class="value-large">
+            <h3>Excelencia</h3>
+            <p>Mejora continua académica, metodológica y operativa.</p>
+          </div>
+          <div class="value-large">
+            <h3>Innovación</h3>
+            <p>Adopción de tecnologías y enfoques didácticos actuales.</p>
+          </div>
+          <div class="value-large">
+            <h3>Colaboración</h3>
+            <p>Trabajo conjunto con empresas y comunidad educativa.</p>
+          </div>
+          <div class="value-large">
+            <h3>Sostenibilidad</h3>
+            <p>Prácticas responsables y visión de impacto duradero.</p>
+          </div>
+          <div class="value-large">
+            <h3>Orientación al estudiante</h3>
+            <p>Acompañamiento integral y personalización del progreso.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="historia" class="history-section fade-in">
+      <h2 class="center-title">Historia de ESS Castellón</h2>
+      <p class="center-sub">Trayectoria de crecimiento local, adaptación pedagógica y compromiso con la empleabilidad.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>1998 — Fundación</h4>
+            <p>Se crea la Escuela Superior de Servicios (ESS) en Castellón como un proyecto educativo local orientado a la formación profesional práctica y a la vinculación con el tejido empresarial de la provincia.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>2005 — Consolidación de ciclos formativos</h4>
+            <p>Se amplía la oferta educativa con ciclos de Comercio, Administración y Servicios, incorporando talleres y espacios prácticos que facilitan una formación aplicada y orientada al empleo.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>2012 — Acuerdos con empresas y programas duales</h4>
+            <p>ESS Castellón firma convenios con empresas locales para implementar formación dual y prácticas remuneradas, mejorando la inserción laboral de su alumnado.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>2017 — Campus y Laboratorio de Innovación</h4>
+            <p>Inauguración de un nuevo campus con un laboratorio de innovación educativa: espacios de simulación, recursos digitales y proyectos interdisciplinares con empresas del sector.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>2020 — Adaptación y enseñanza híbrida</h4>
+            <p>Frente a nuevos retos sanitarios, ESS Castellón acelera la digitalización de contenidos, refuerza la formación telemática y desarrolla protocolos de aprendizaje seguro combinando presencial y remoto.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>2023 — Sostenibilidad y red profesional</h4>
+            <p>Lanzamiento de iniciativas de sostenibilidad en el campus y expansión de la red de empleo, con un programa de mentoría que conecta al alumnado con profesionales y empresas de la provincia.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <h4>Actualidad — Formación orientada al futuro</h4>
+            <p>ESS Castellón sigue evolucionando hacia modelos pedagógicos centrados en competencias, con proyectos reales, alianzas sectoriales y un enfoque en empleabilidad, emprendimiento y responsabilidad social.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonios-section fade-in">
+      <h2 class="center-title">Testimonios</h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <p>"La orientación y acompañamiento fueron clave para mi inserción laboral."</p>
+          <span class="author">Alumna FP Gestión</span>
+        </div>
+        <div class="testi-card">
+          <p>"Los proyectos con empresas me dieron confianza y experiencia real."</p>
+          <span class="author">Alumno Comercio Exterior</span>
+        </div>
+        <div class="testi-card">
+          <p>"Un entorno humano y exigente que impulsa a mejorar cada semana."</p>
+          <span class="author">Alumno Informática</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta-section fade-in">
+      <div class="final-cta-box">
+        <h2>¿Listo para formar parte?</h2>
+        <p>Explora nuestras titulaciones y da el siguiente paso hacia tu futuro profesional.</p>
+        <a href="Titulaciones.html" class="cta-main alt-cta">Ver Titulaciones</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="site-footer">
+    <p>&copy; 2025 ESS - Todos los derechos reservados - Grupo 4</p>
+  </footer>
+
+  <script>
+    (function() {
+      const isIgnorable = img => img.classList.contains('mark');
+      function openLightbox(img) {
+        const backdrop = document.createElement('div');
+        backdrop.className = 'lightbox-backdrop';
+        backdrop.setAttribute('role','dialog');
+        backdrop.setAttribute('aria-label', 'Imagen ampliada');
+        const big = document.createElement('img');
+        big.src = img.src;
+        big.alt = img.alt || '';
+        backdrop.appendChild(big);
+        document.body.appendChild(backdrop);
+        document.body.classList.add('lb-open');
+        function close() {
+          backdrop.remove();
+          document.body.classList.remove('lb-open');
+          document.removeEventListener('keydown', onKey);
+        }
+        function onKey(e){ if(e.key==='Escape') close(); }
+        backdrop.addEventListener('click', close);
+        big.addEventListener('click', e => e.stopPropagation());
+        document.addEventListener('keydown', onKey);
+      }
+      document.addEventListener('click', e => {
+        const img = e.target.closest('img');
+        if(!img || isIgnorable(img)) return;
+        openLightbox(img);
+      });
+    })();
+  </script>
+</body>
+</html>

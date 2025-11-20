@@ -1,0 +1,258 @@
+<!--
+Archivo: Sedes.html
+Ruta (selección original): /f:/ABP-CAS/Sedes.html
+Propósito:
+  Página estática que muestra las sedes de ESS: encabezado con navegación,
+  sección hero, rejilla de tarjetas por sede y pie de página. Incluye un
+  lightbox sencillo para ver imágenes en tamaño grande.
+
+Estructura general:
+  - DOCTYPE, html[lang="es"], head (meta, título, fuentes, hoja de estilos)
+  - body
+    - header.site-header.header-simple
+      - .header-inner: logo (.mark + .brand) y nav.nav-links con ul/li/a
+    - section.page-hero.is-sedes: hero con overlay, título y subtítulo
+    - section.sedes-section
+      - .container
+        - h2.main-sedes-title, p.intro-text
+        - .sedes-grid: varios article.sede-card.fade-in
+          - img.sede-img.card-vertical-img
+          - .card-body
+            - .card-header > h3
+            - p (descripción)
+            - span.badge-mode (modificadores: .presencial, .hibrido, .online)
+    - footer
+
+Recursos y dependencias:
+  - Google Fonts: Poppins + Inter (preconnect + link)
+  - Hoja de estilos local: estilos/styles.css
+  - Imágenes locales: img/*.jpg/.jpeg
+  - Sin librerías JS externas; script del lightbox está inline
+
+Notas de accesibilidad:
+  - html lang="es" presente.
+  - Meta viewport configurado (responsivo).
+  - Navegación usa role="navigation" y aria-label.
+  - Header usa role="banner".
+  - Lightbox crea un backdrop con role="dialog" — sería recomendable añadir aria-modal="true",
+    un aria-label o aria-describedby para más contexto.
+  - Todos los <img> incluyen alt (comprobar que sean descriptivos y únicos).
+  - Las tarjetas no son enlaces; si deben ser seleccionables, envolver en <a> o añadir tabindex/roles.
+  - Gestión de foco en lightbox:
+    - Se cierra con Escape, pero no hay trampa de foco ni retorno del foco al elemento disparador.
+    - Recomendado: guardar referencia del elemento origen, mover foco al diálogo (o botón cerrar),
+      trapear foco dentro del diálogo y restaurarlo al cerrar.
+
+Comportamiento del lightbox (script inline):
+  - Listener delegado de click en document:
+    - Si el objetivo (o su ancestro más cercano) es una <img> y no tiene la clase 'mark',
+      abre el lightbox.
+  - open(img):
+    - Crea .lightbox-backdrop con role="dialog".
+    - Inserta una <img> grande usando src y alt de la imagen clicada.
+    - Añade class 'lb-open' al body.
+    - Clic en el backdrop cierra; clic en la imagen evita la propagación.
+    - Tecla Escape cierra mediante keydown listener.
+  - Observaciones:
+    - No se oculta el contenido de fondo con aria-hidden.
+    - No hay botón de cierre accesible — añadir un botón con aria-label="Cerrar" es recomendable.
+    - Al cerrar se elimina el backdrop y la clase, pero no hay manejo explícito del foco/atributos ARIA.
+
+Clases y selectores (para CSS/JS):
+  - Header: .site-header .header-inner .logo .mark .brand
+  - Navegación: .nav-links > ul > li > a (.active para el enlace activo)
+  - Hero: .page-hero, .is-sedes, .overlay, .hero-inner, .hero-sub
+  - Área sedes: .sedes-section, .container, .main-sedes-title, .intro-text
+  - Rejilla: .sedes-grid, .sede-card, .fade-in, .sede-img, .card-vertical-img,
+    .card-body, .card-header, .badge-mode (.presencial/.hibrido/.online)
+  - Lightbox: .lightbox-backdrop, body.lb-open
+
+Recomendaciones / mejoras:
+  - Imágenes:
+    - Añadir loading="lazy" a imágenes no críticas.
+    - Usar srcset / sizes y formatos modernos (webp) para ahorrar ancho de banda.
+    - Definir dimensiones o usar aspect-ratio para reducir CLS.
+  - Accesibilidad del lightbox:
+    - Añadir aria-modal="true" al backdrop.
+    - Incluir un botón visible y enfocables con aria-label="Cerrar".
+    - Implementar trampa de foco y restaurar foco al origen.
+    - Añadir role="img" y nombre accesible si es necesario.
+  - Semántica:
+    - Envolver contenido principal en <main> o usar role="main".
+  - Mejora progresiva:
+    - Si las tarjetas deben llevar a detalles, envolverlas en <a>.
+  - Seguridad y mantenimiento:
+    - Extraer el script inline a un archivo JS si crece.
+    - Mantener consistencia en nombres de clases (BEM u otro patrón).
+
+Supuestos:
+  - Sitio estático sin enrutado cliente.
+  - Imágenes locales disponibles en las rutas referenciadas.
+  - styles.css contiene estilos necesarios (no incluido aquí).
+
+Registro de cambios / metadatos:
+  - Título: "Vista previa Sedes ESS"
+  - Footer: "© 2025 ESS"
+
+Fin del comentario de documentación.
+-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Metadatos básicos -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vista previa Sedes ESS</title>
+  <link rel="shortcut icon" href="img/logo.jpg" />
+  
+  <!-- Fuentes externas (Google Fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos local -->
+  <link rel="stylesheet" href="estilos/styles.css">
+</head>
+
+<body>
+  <!-- Header del sitio: banner con logo y navegación principal -->
+  <header class="site-header header-simple" role="banner">
+    <div class="header-inner">
+      <!-- Logo: .mark es un elemento visual (decorativo) y .brand es texto visible -->
+      <div class="logo"><span class="mark" aria-hidden="true"></span><span class="brand">ESS</span></div>
+
+      <!-- Navegación principal: lista de enlaces -->
+      <nav class="nav-links" role="navigation" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a class="active" href="Sedes.html">Sedes</a></li>
+          <li><a href="Titulaciones.html">Titulaciones</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Sección hero: imagen/estética de cabecera de la página de sedes -->
+  <section class="page-hero is-sedes">
+    <!-- overlay: capa semitransparente sobre la imagen de fondo (controlado por CSS) -->
+    <div class="overlay"></div>
+    <div class="hero-inner">
+      <h1>Sedes ESS</h1>
+      <p class="hero-sub">Centros formativos modernos y conectados</p>
+    </div>
+  </section>
+
+  <!-- Sección principal con la lista/rejilla de sedes -->
+  <section class="sedes-section">
+    <div class="container">
+      <h2 id="h2" class="main-sedes-title">Nuestras sedes</h2>
+      <p class="intro-text">Encuentra tu centro ESS más cercano.</p>
+
+      <!-- Rejilla de tarjetas: cada article representa una sede -->
+      <div class="sedes-grid">
+        <article class="sede-card fade-in">
+          <!-- Imagen de la sede: comprueba el alt (descriptivo) -->
+          <img class="sede-img card-vertical-img" src="img/badajoz.jpg" alt="Sede Badajoz">
+          <div class="card-body">
+            <div class="card-header"><h3>Badajoz</h3></div>
+            <p>Centro especializado en administración y digitalización.</p>
+            <!-- badge-mode indica el modo de impartición -->
+            <span class="badge-mode presencial">Presencial</span>
+          </div>
+        </article>
+
+        <article class="sede-card fade-in">
+          <img class="sede-img card-vertical-img" src="img/toledo.jpg" alt="Sede Toledo">
+          <div class="card-body">
+            <div class="card-header"><h3>Toledo</h3></div>
+            <p>Formación en comunicación y resolución de conflictos.</p>
+            <span class="badge-mode hibrido">Híbrido</span>
+          </div>
+        </article>
+
+        <article class="sede-card fade-in">
+          <img class="sede-img card-vertical-img" src="img/valencia.jpeg" alt="Sede Valencia">
+          <div class="card-body">
+            <div class="card-header"><h3>Valencia</h3></div>
+            <p>Enfoque en comercio, marketing y e‑commerce.</p>
+            <span class="badge-mode presencial">Presencial</span>
+          </div>
+        </article>
+
+        <article class="sede-card fade-in">
+          <img class="sede-img card-vertical-img" src="img/castellon.jpg" alt="Sede Castellón">
+          <div class="card-body">
+            <div class="card-header"><h3>Castellón</h3></div>
+            <p>Formación en economía y administración.</p>
+            <span class="badge-mode online">Online</span>
+          </div>
+        </article>
+
+        <article class="sede-card fade-in">
+          <img class="sede-img card-vertical-img" src="img/sevilla.jpg" alt="Sede Sevilla">
+          <div class="card-body">
+            <div class="card-header"><h3>Sevilla</h3></div>
+            <p>Enfoque en Geografía, Historia y Biología Humana.</p>
+            <span class="badge-mode presencial">Presencial</span>
+          </div>
+        </article>
+
+        <article class="sede-card fade-in">
+          <img class="sede-img card-vertical-img" src="img/barcelona.jpg" alt="Sede Barcelona">
+          <div class="card-body">
+            <div class="card-header"><h3>Barcelona</h3></div>
+            <p>Centro especializado en sanidad.</p>
+            <span class="badge-mode hibrido">Híbrido</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pie de página simple -->
+  <footer><p>© 2025 ESS</p></footer>
+
+  <!-- Script inline: lightbox simple para ampliar imágenes -->
+  <script>
+    (function(){
+      // ignore: función que evita que elementos decorativos (.mark) disparen el lightbox
+      const ignore = i => i.classList.contains('mark');
+
+      // open(i): crea un backdrop y muestra la imagen en grande
+      function open(i){
+        const back=document.createElement('div');
+        back.className='lightbox-backdrop';
+        back.setAttribute('role','dialog'); // marca como diálogo para lectores de pantalla
+
+        // crea la imagen grande usando src y alt del <img> clicado
+        const big=document.createElement('img');
+        big.src=i.src; big.alt=i.alt||'';
+        back.appendChild(big);
+
+        document.body.appendChild(back);
+        document.body.classList.add('lb-open'); // útil para controlar overflow con CSS
+
+        // close: elimina backdrop y quita listeners
+        function close(){ 
+          back.remove(); 
+          document.body.classList.remove('lb-open'); 
+          document.removeEventListener('keydown', onKey); 
+        }
+        function onKey(e){ if(e.key==='Escape') close(); }
+
+        back.addEventListener('click',close); // clic fuera (backdrop) cierra
+        big.addEventListener('click',e=>e.stopPropagation()); // clic en la imagen no cierra
+        document.addEventListener('keydown',onKey); // Escape para cerrar
+      }
+
+      // Delegación de eventos: si el objetivo o su ancestro más cercano es una <img>, abrir lightbox
+      document.addEventListener('click',e=>{
+        const im=e.target.closest('img');
+        if(!im || ignore(im)) return;
+        open(im);
+      });
+    })();
+  </script>
+</body>
+</html>

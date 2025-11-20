@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vista previa - Titulaciones ESS (Estilo Unificado)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos/styles.css">
+  <link rel="shortcut icon" href="img/logo.jpg" /> 
+</head>
+
+<body>
+  <header class="site-header header-simple" role="banner">
+    <div class="header-inner">
+      <!-- Logo: .mark es un elemento visual (decorativo) y .brand es texto visible -->
+      <div class="logo"><span class="mark" aria-hidden="true"></span><span class="brand">ESS</span></div>
+
+      <!-- Navegación principal: lista de enlaces -->
+      <nav class="nav-links" role="navigation" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="Sedes.html">Sedes</a></li>
+          <li><a class="active" href="Titulaciones.html">Titulaciones</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Nuevo: Page Hero unificado -->
+  <section class="page-hero is-titulaciones">
+    <div class="overlay"></div>
+    <div class="hero-inner">
+      <h1 style="font-family: 'Poppins', sans-serif; font-weight: 800; letter-spacing: .3px;">
+        Titulaciones
+      </h1>
+      <p class="hero-sub">Programas orientados al empleo y a la excelencia académica</p>
+    </div>
+  </section>
+
+  <main>
+    <section id="titulaciones" class="titulaciones-section fade-in">
+      <div class="container">
+        <h2 class="section-title main-titulaciones-title">Nuestras titulaciones</h2>
+        <p class="section-subtitle">Programas diseñados para formar profesionales listos para el mercado laboral.</p>
+
+        <div class="titulaciones-grid">
+          <!-- Comercio Exterior -->
+          <article class="titulacion-card">
+            <img class="card-vertical-img" src="img/comercio.jpg" alt="Comercio Exterior">
+            <div class="card-header"><h3>Comercio Exterior</h3></div>
+            <p>Formación en logística internacional, documentación aduanera y operaciones de exportación.</p>
+            <ul class="highlights">
+              <li>Duración: 2 años</li>
+              <li>Prácticas en empresas</li>
+              <li>Itinerarios internacionales</li>
+            </ul>
+            <span class="badge-mode presencial">Presencial</span>
+          </article>
+
+          <!-- Computación -->
+          <article class="titulacion-card">
+            <img class="card-vertical-img" src="img/compu.jpg" alt="Computación">
+            <div class="card-header"><h3>Computación</h3></div>
+            <p>Formación en programación, soporte técnico y gestión de sistemas informáticos.</p>
+            <ul class="highlights">
+              <li>Python, JavaScript</li>
+              <li>Laboratorios equipados</li>
+              <li>Certificaciones opcionales</li>
+            </ul>
+            <span class="badge-mode hibrido">Híbrido</span>
+          </article>
+
+          <!-- Terapia Ocupacional -->
+          <article class="titulacion-card">
+            <img class="card-vertical-img" src="img/terapia.jpg" alt="Terapia Ocupacional">
+            <div class="card-header"><h3>Terapia Ocupacional</h3></div>
+            <p>Especialización en intervención terapéutica y rehabilitación funcional.</p>
+            <ul class="highlights">
+              <li>Prácticas en centros especializados</li>
+              <li>Metodologías modernas</li>
+              <li>Enfoque comunitario</li>
+            </ul>
+            <span class="badge-mode presencial">Presencial</span>
+          </article>
+
+          <!-- Gestión de Servicios -->
+          <article class="titulacion-card">
+            <img class="card-vertical-img" src="img/serv.jpg" alt="Gestión de Servicios">
+            <div class="card-header"><h3>Gestión de Servicios</h3></div>
+            <p>Formación en atención al cliente, calidad en servicios y gestión operativa.</p>
+            <ul class="highlights">
+              <li>Casos reales</li>
+              <li>Proyectos de empresa</li>
+              <li>Mentoring profesional</li>
+            </ul>
+            <span class="badge-mode online">Online</span>
+          </article>
+
+          <article class="titulacion-card">
+            <img class="card-vertical-img" src="img/apsd.jpg" alt="Dependencia GM">
+            <div class="card-header"><h3>Atención a Personas en Situación de Dependencia – GM</h3></div>
+            <p>Formación en atención al cliente, calidad en servicios y gestión operativa.</p>
+            <ul class="highlights">
+              <li>Integración Social – GS</li>
+              <li>Educación Infantil – GS</li>
+            </ul>
+            <span class="badge-mode presencial">Presencial</span>
+          </article>
+
+          <article class="titulacion-card">
+            <img class="card-vertical-img" src="img/elec.jpg" alt="Electricidad y Electrónica">
+            <div class="card-header"><h3>Electricidad y Electrónica</h3></div>
+            <p>Formación orientado al trabajo práctico de instalaciones: viviendas, edificios, comercios, industrias, y sistemas básicos de automatización..</p>
+            <ul class="highlights">
+              <li>Instalaciones Eléctricas y Automáticas – GM</li>
+              <li>Automatización y robótica industrial – GS</li>
+            </ul>
+            <span class="badge-mode online">Online</span>
+          </article>
+        </div>
+
+        <div class="titulaciones-cta">
+          <p>¿Quieres más información? <a href="contacto.html">Contáctanos 📧</a></p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <script>
+    (function(){
+      const ignore = i => i.classList.contains('mark');
+      function show(i){
+        const b=document.createElement('div');
+        b.className='lightbox-backdrop';
+        b.setAttribute('role','dialog');
+        const m=document.createElement('img');
+        m.src=i.src; m.alt=i.alt||'';
+        b.appendChild(m);
+        document.body.appendChild(b);
+        document.body.classList.add('lb-open');
+        function done(){ b.remove(); document.body.classList.remove('lb-open'); document.removeEventListener('keydown',esc); }
+        function esc(e){ if(e.key==='Escape') done(); }
+        b.addEventListener('click',done);
+        m.addEventListener('click',e=>e.stopPropagation());
+        document.addEventListener('keydown',esc);
+      }
+      document.addEventListener('click',e=>{
+        const im=e.target.closest('img');
+        if(!im || ignore(im)) return;
+        show(im);
+      });
+    })();
+  </script>
+</body>
+</html>
